@@ -1,0 +1,1823 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="../favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+    <link rel="shortcut icon" href="../favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="PW2026" />
+    <link rel="manifest" href="../site.webmanifest" />
+    <title>Bingo de l'accessibilité : mini-site LumoMobile</title>
+    <style>
+        @font-face {
+            font-family: 'atk_reg';
+            src: url('../css/fonts/atkinson-regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'atk_bold';
+            src: url('../css/fonts/atkinson-bold.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        :root {
+            --primary-color: rgb(23, 61, 81);
+            --lightest-color: rgb(250, 250, 250);
+            --secondary-color: rgb(75, 196, 177);
+            --joker: rgb(255, 248, 225);
+            --font-bold: atk_bold, arial, sans-serif;
+            --font-reg: atk_reg, arial, sans-serif;
+        }
+
+        html {
+            font-size: 62.5%;
+        }
+
+        body {
+            max-width: 102.4rem;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            background: #fff;
+            color: var(--primary-color);
+            font-family: var(--font-reg);
+            font-size: 1.6rem;
+            line-height: 1.4;
+        }
+
+        h1, h2 {
+            font-family: var(--font-bold);
+        }
+
+        h1 {
+            font-size: 2.4rem;
+            margin: 0 0 0.3rem;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            margin: 0 0 0.6rem;
+        }
+
+        .card {
+            margin-block: 2rem;
+            padding-top: 2rem;
+            border-top: 2px solid var(--primary-color);
+        }
+
+        .rules {
+            margin: 0 0 1rem;
+            padding: 1rem 2rem;
+            background: var(--primary-color);
+            color: var(--secondary-color);
+            border-radius: 1rem;
+        }
+
+        .rules p {
+            margin: 0 0 0.5rem;
+        }
+
+        .rules p:last-child {
+            margin-bottom: 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .grid li {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            min-height: 8rem;
+            padding: 1rem;
+            border: 1px solid var(--primary-color);
+            border-radius: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .grid .joker {
+            background: var(--joker);
+            font-weight: bold;
+        }
+
+        .grid .joker input {
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .statement {
+            flex: 1;
+        }
+
+        .location {
+            font-size: 1.4rem;
+            color: rgb(70, 70, 70);
+        }
+
+        input[type="checkbox"] {
+            accent-color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+
+        .location input {
+            width: 100%;
+            border: 0;
+            border-bottom: 2px solid var(--primary-color);
+            padding: 0.1rem;
+            font: inherit;
+        }
+
+        :focus-visible {
+            outline: 3px solid var(--primary-color);
+            outline-offset: 2px;
+        }
+
+        @media screen and (max-width: 48rem) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media print {
+            @page {
+                size: A4 landscape;
+                margin: 10mm;
+            }
+
+            body {
+                max-width: none;
+                margin: 0;
+                padding: 0;
+                font-size: 10pt;
+            }
+
+            h1 {
+                display: none;
+            }
+
+            h2 {
+                font-size: 14pt;
+                margin: 0 0 2mm;
+            }
+
+            .card {
+                width: 100%;
+                max-width: 100%;
+                margin: 0;
+                padding: 0;
+                border-top: 0;
+                break-inside: avoid;
+                break-after: page;
+            }
+
+            .card:last-of-type {
+                break-after: auto;
+            }
+
+            .rules {
+                margin: 0 0 3mm;
+                padding: 0;
+                font-size: 10pt;
+                background: var(--lightest-color);
+                color: var(--primary-color);
+            }
+
+            .rules p {
+                margin: 0 0 1mm;
+            }
+
+            .grid {
+                grid-template-columns: repeat(5, 1fr);
+                grid-template-rows: repeat(5, 27mm);
+                gap: 6mm 3mm;
+            }
+
+            .grid li {
+                min-height: 0;
+                height: 27mm;
+                gap: 1mm;
+                padding: 1.5mm;
+                font-size: 10pt;
+                border-radius: 0;
+            }
+
+            .location {
+                font-size: 9pt;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Bingo de l'accessibilité</h1>
+    <section class="card">
+        <h2>Carte 1 : bingo de l'accessibilité</h2>
+            <div class="rules">
+                <p>
+                    Explore les deux pages du mini-site LumoMobile, l'accueil et le formulaire de
+                    contact. Dès que tu repères un des défauts de ta carte, coche la case et note où tu
+                    l'as trouvé. Une ligne, une colonne ou une diagonale complète, et c'est bingo !
+                
+                    Varie les méthodes : range la souris et navigue au clavier, zoome à 200 %,
+                    désactive les styles, etc.
+                </p>
+            </div>
+        <ul class="grid">
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c1-1">
+                    <label for="c1-1">Un texte gris trop clair pour être lu</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c1-1">Où&nbsp;?</label>
+                    <input type="text" id="ou-c1-1">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c1-2">
+                    <label for="c1-2">Une image sans aucun attribut alt</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c1-2">Où&nbsp;?</label>
+                    <input type="text" id="ou-c1-2">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c1-3">
+                    <label for="c1-3">Une animation impossible à arrêter</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c1-3">Où&nbsp;?</label>
+                    <input type="text" id="ou-c1-3">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c1-4">
+                    <label for="c1-4">Des champs personnels sans autocomplete</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c1-4">Où&nbsp;?</label>
+                    <input type="text" id="ou-c1-4">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c1-5">
+                    <label for="c1-5">Un contenu visible mais masqué aux lecteurs d'écran</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c1-5">Où&nbsp;?</label>
+                    <input type="text" id="ou-c1-5">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c1-6">
+                    <label for="c1-6">Des onglets impossibles à utiliser au clavier</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c1-6">Où&nbsp;?</label>
+                    <input type="text" id="ou-c1-6">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c1-7">
+                    <label for="c1-7">Du contenu coupé par une hauteur fixe</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c1-7">Où&nbsp;?</label>
+                    <input type="text" id="ou-c1-7">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c1-8">
+                    <label for="c1-8">Un changement de contenu qui n'est jamais annoncé</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c1-8">Où&nbsp;?</label>
+                    <input type="text" id="ou-c1-8">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c1-9">
+                    <label for="c1-9">Le focus clavier totalement invisible</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c1-9">Où&nbsp;?</label>
+                    <input type="text" id="ou-c1-9">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c1-10">
+                    <label for="c1-10">Un texte peu contrasté sur fond sombre</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c1-10">Où&nbsp;?</label>
+                    <input type="text" id="ou-c1-10">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c1-11">
+                    <label for="c1-11">Aucune zone : ni header, ni nav, ni main, ni footer</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c1-11">Où&nbsp;?</label>
+                    <input type="text" id="ou-c1-11">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c1-12">
+                    <label for="c1-12">Des rôles ARIA menu et menuitem posés sur de vrais liens</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c1-12">Où&nbsp;?</label>
+                    <input type="text" id="ou-c1-12">
+                </span>
+            </li>
+            <li class="joker">
+                <span class="statement">
+                    <input type="checkbox" id="c1-13">
+                    <label for="c1-13">JOKER : un défaut que tu as trouvé et qui n'est pas dans la grille</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c1-13">Où&nbsp;?</label>
+                    <input type="text" id="ou-c1-13">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c1-14">
+                    <label for="c1-14">Des boutons radio sans regroupement ni légende</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c1-14">Où&nbsp;?</label>
+                    <input type="text" id="ou-c1-14">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c1-15">
+                    <label for="c1-15">Un alt qui dit « icône » ou « image »</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c1-15">Où&nbsp;?</label>
+                    <input type="text" id="ou-c1-15">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c1-16">
+                    <label for="c1-16">Un faux lien ou un faux bouton fabriqué avec une div</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c1-16">Où&nbsp;?</label>
+                    <input type="text" id="ou-c1-16">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c1-17">
+                    <label for="c1-17">Aucun titre de niveau 1 sur la page</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c1-17">Où&nbsp;?</label>
+                    <input type="text" id="ou-c1-17">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c1-18">
+                    <label for="c1-18">Une erreur signalée par une bordure rouge et rien d'autre</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c1-18">Où&nbsp;?</label>
+                    <input type="text" id="ou-c1-18">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c1-19">
+                    <label for="c1-19">Une liste fabriquée avec des retours à la ligne</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c1-19">Où&nbsp;?</label>
+                    <input type="text" id="ou-c1-19">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c1-20">
+                    <label for="c1-20">Une information donnée uniquement par la couleur</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c1-20">Où&nbsp;?</label>
+                    <input type="text" id="ou-c1-20">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c1-21">
+                    <label for="c1-21">Un prix ou une remise affiché uniquement dans une image</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c1-21">Où&nbsp;?</label>
+                    <input type="text" id="ou-c1-21">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c1-22">
+                    <label for="c1-22">Le même intitulé de lien répété sur toute la page</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c1-22">Où&nbsp;?</label>
+                    <input type="text" id="ou-c1-22">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c1-23">
+                    <label for="c1-23">Une page sans attribut lang</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c1-23">Où&nbsp;?</label>
+                    <input type="text" id="ou-c1-23">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c1-24">
+                    <label for="c1-24">Un titre qui n'en est pas un : une div stylée</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c1-24">Où&nbsp;?</label>
+                    <input type="text" id="ou-c1-24">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c1-25">
+                    <label for="c1-25">Un champ de formulaire sans étiquette</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c1-25">Où&nbsp;?</label>
+                    <input type="text" id="ou-c1-25">
+                </span>
+            </li>
+        </ul>
+    </section>
+
+    <section class="card">
+        <h2>Carte 2 : bingo de l'accessibilité</h2>
+            <div class="rules">
+                <p>
+                    Explore les deux pages du mini-site LumoMobile, l'accueil et le formulaire de
+                    contact. Dès que tu repères un des défauts de ta carte, coche la case et note où tu
+                    l'as trouvé. Une ligne, une colonne ou une diagonale complète, et c'est bingo !
+                
+                    Varie les méthodes : range la souris et navigue au clavier, zoome à 200 %,
+                    désactive les styles, etc.
+                </p>
+            </div>
+        <ul class="grid">
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c2-1">
+                    <label for="c2-1">Un faux lien ou un faux bouton fabriqué avec une div</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c2-1">Où&nbsp;?</label>
+                    <input type="text" id="ou-c2-1">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c2-2">
+                    <label for="c2-2">Des champs personnels sans autocomplete</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c2-2">Où&nbsp;?</label>
+                    <input type="text" id="ou-c2-2">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c2-3">
+                    <label for="c2-3">Un prix ou une remise affiché uniquement dans une image</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c2-3">Où&nbsp;?</label>
+                    <input type="text" id="ou-c2-3">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c2-4">
+                    <label for="c2-4">Un titre qui n'en est pas un : une div stylée</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c2-4">Où&nbsp;?</label>
+                    <input type="text" id="ou-c2-4">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c2-5">
+                    <label for="c2-5">Des boutons radio sans regroupement ni légende</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c2-5">Où&nbsp;?</label>
+                    <input type="text" id="ou-c2-5">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c2-6">
+                    <label for="c2-6">Aucun titre de niveau 1 sur la page</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c2-6">Où&nbsp;?</label>
+                    <input type="text" id="ou-c2-6">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c2-7">
+                    <label for="c2-7">Un texte peu contrasté sur fond sombre</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c2-7">Où&nbsp;?</label>
+                    <input type="text" id="ou-c2-7">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c2-8">
+                    <label for="c2-8">Du contenu coupé par une hauteur fixe</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c2-8">Où&nbsp;?</label>
+                    <input type="text" id="ou-c2-8">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c2-9">
+                    <label for="c2-9">Une information donnée uniquement par la couleur</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c2-9">Où&nbsp;?</label>
+                    <input type="text" id="ou-c2-9">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c2-10">
+                    <label for="c2-10">Un changement de contenu qui n'est jamais annoncé</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c2-10">Où&nbsp;?</label>
+                    <input type="text" id="ou-c2-10">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c2-11">
+                    <label for="c2-11">Un texte gris trop clair pour être lu</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c2-11">Où&nbsp;?</label>
+                    <input type="text" id="ou-c2-11">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c2-12">
+                    <label for="c2-12">Le focus clavier totalement invisible</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c2-12">Où&nbsp;?</label>
+                    <input type="text" id="ou-c2-12">
+                </span>
+            </li>
+            <li class="joker">
+                <span class="statement">
+                    <input type="checkbox" id="c2-13">
+                    <label for="c2-13">JOKER : un défaut que tu as trouvé et qui n'est pas dans la grille</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c2-13">Où&nbsp;?</label>
+                    <input type="text" id="ou-c2-13">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c2-14">
+                    <label for="c2-14">Aucune zone : ni header, ni nav, ni main, ni footer</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c2-14">Où&nbsp;?</label>
+                    <input type="text" id="ou-c2-14">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c2-15">
+                    <label for="c2-15">Un champ de formulaire sans étiquette</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c2-15">Où&nbsp;?</label>
+                    <input type="text" id="ou-c2-15">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c2-16">
+                    <label for="c2-16">Des rôles ARIA menu et menuitem posés sur de vrais liens</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c2-16">Où&nbsp;?</label>
+                    <input type="text" id="ou-c2-16">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c2-17">
+                    <label for="c2-17">Un alt qui dit « icône » ou « image »</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c2-17">Où&nbsp;?</label>
+                    <input type="text" id="ou-c2-17">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c2-18">
+                    <label for="c2-18">Une liste fabriquée avec des retours à la ligne</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c2-18">Où&nbsp;?</label>
+                    <input type="text" id="ou-c2-18">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c2-19">
+                    <label for="c2-19">Une erreur signalée par une bordure rouge et rien d'autre</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c2-19">Où&nbsp;?</label>
+                    <input type="text" id="ou-c2-19">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c2-20">
+                    <label for="c2-20">Des onglets impossibles à utiliser au clavier</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c2-20">Où&nbsp;?</label>
+                    <input type="text" id="ou-c2-20">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c2-21">
+                    <label for="c2-21">Un contenu visible mais masqué aux lecteurs d'écran</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c2-21">Où&nbsp;?</label>
+                    <input type="text" id="ou-c2-21">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c2-22">
+                    <label for="c2-22">Une image sans aucun attribut alt</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c2-22">Où&nbsp;?</label>
+                    <input type="text" id="ou-c2-22">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c2-23">
+                    <label for="c2-23">Une page sans attribut lang</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c2-23">Où&nbsp;?</label>
+                    <input type="text" id="ou-c2-23">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c2-24">
+                    <label for="c2-24">Le même intitulé de lien répété sur toute la page</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c2-24">Où&nbsp;?</label>
+                    <input type="text" id="ou-c2-24">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c2-25">
+                    <label for="c2-25">Une animation impossible à arrêter</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c2-25">Où&nbsp;?</label>
+                    <input type="text" id="ou-c2-25">
+                </span>
+            </li>
+        </ul>
+    </section>
+
+    <section class="card">
+        <h2>Carte 3 : bingo de l'accessibilité</h2>
+            <div class="rules">
+                <p>
+                    Explore les deux pages du mini-site LumoMobile, l'accueil et le formulaire de
+                    contact. Dès que tu repères un des défauts de ta carte, coche la case et note où tu
+                    l'as trouvé. Une ligne, une colonne ou une diagonale complète, et c'est bingo !
+                
+                    Varie les méthodes : range la souris et navigue au clavier, zoome à 200 %,
+                    désactive les styles, etc.
+                </p>
+            </div>
+        <ul class="grid">
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c3-1">
+                    <label for="c3-1">Une page sans attribut lang</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c3-1">Où&nbsp;?</label>
+                    <input type="text" id="ou-c3-1">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c3-2">
+                    <label for="c3-2">Une animation impossible à arrêter</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c3-2">Où&nbsp;?</label>
+                    <input type="text" id="ou-c3-2">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c3-3">
+                    <label for="c3-3">Une image sans aucun attribut alt</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c3-3">Où&nbsp;?</label>
+                    <input type="text" id="ou-c3-3">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c3-4">
+                    <label for="c3-4">Le même intitulé de lien répété sur toute la page</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c3-4">Où&nbsp;?</label>
+                    <input type="text" id="ou-c3-4">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c3-5">
+                    <label for="c3-5">Un prix ou une remise affiché uniquement dans une image</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c3-5">Où&nbsp;?</label>
+                    <input type="text" id="ou-c3-5">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c3-6">
+                    <label for="c3-6">Un champ de formulaire sans étiquette</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c3-6">Où&nbsp;?</label>
+                    <input type="text" id="ou-c3-6">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c3-7">
+                    <label for="c3-7">Un texte peu contrasté sur fond sombre</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c3-7">Où&nbsp;?</label>
+                    <input type="text" id="ou-c3-7">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c3-8">
+                    <label for="c3-8">Des boutons radio sans regroupement ni légende</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c3-8">Où&nbsp;?</label>
+                    <input type="text" id="ou-c3-8">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c3-9">
+                    <label for="c3-9">Le focus clavier totalement invisible</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c3-9">Où&nbsp;?</label>
+                    <input type="text" id="ou-c3-9">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c3-10">
+                    <label for="c3-10">Un contenu visible mais masqué aux lecteurs d'écran</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c3-10">Où&nbsp;?</label>
+                    <input type="text" id="ou-c3-10">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c3-11">
+                    <label for="c3-11">Un texte gris trop clair pour être lu</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c3-11">Où&nbsp;?</label>
+                    <input type="text" id="ou-c3-11">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c3-12">
+                    <label for="c3-12">Une liste fabriquée avec des retours à la ligne</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c3-12">Où&nbsp;?</label>
+                    <input type="text" id="ou-c3-12">
+                </span>
+            </li>
+            <li class="joker">
+                <span class="statement">
+                    <input type="checkbox" id="c3-13">
+                    <label for="c3-13">JOKER : un défaut que tu as trouvé et qui n'est pas dans la grille</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c3-13">Où&nbsp;?</label>
+                    <input type="text" id="ou-c3-13">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c3-14">
+                    <label for="c3-14">Des champs personnels sans autocomplete</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c3-14">Où&nbsp;?</label>
+                    <input type="text" id="ou-c3-14">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c3-15">
+                    <label for="c3-15">Un titre qui n'en est pas un : une div stylée</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c3-15">Où&nbsp;?</label>
+                    <input type="text" id="ou-c3-15">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c3-16">
+                    <label for="c3-16">Des onglets impossibles à utiliser au clavier</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c3-16">Où&nbsp;?</label>
+                    <input type="text" id="ou-c3-16">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c3-17">
+                    <label for="c3-17">Aucune zone : ni header, ni nav, ni main, ni footer</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c3-17">Où&nbsp;?</label>
+                    <input type="text" id="ou-c3-17">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c3-18">
+                    <label for="c3-18">Une erreur signalée par une bordure rouge et rien d'autre</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c3-18">Où&nbsp;?</label>
+                    <input type="text" id="ou-c3-18">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c3-19">
+                    <label for="c3-19">Un alt qui dit « icône » ou « image »</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c3-19">Où&nbsp;?</label>
+                    <input type="text" id="ou-c3-19">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c3-20">
+                    <label for="c3-20">Un changement de contenu qui n'est jamais annoncé</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c3-20">Où&nbsp;?</label>
+                    <input type="text" id="ou-c3-20">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c3-21">
+                    <label for="c3-21">Une information donnée uniquement par la couleur</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c3-21">Où&nbsp;?</label>
+                    <input type="text" id="ou-c3-21">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c3-22">
+                    <label for="c3-22">Un faux lien ou un faux bouton fabriqué avec une div</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c3-22">Où&nbsp;?</label>
+                    <input type="text" id="ou-c3-22">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c3-23">
+                    <label for="c3-23">Du contenu coupé par une hauteur fixe</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c3-23">Où&nbsp;?</label>
+                    <input type="text" id="ou-c3-23">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c3-24">
+                    <label for="c3-24">Aucun titre de niveau 1 sur la page</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c3-24">Où&nbsp;?</label>
+                    <input type="text" id="ou-c3-24">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c3-25">
+                    <label for="c3-25">Des rôles ARIA menu et menuitem posés sur de vrais liens</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c3-25">Où&nbsp;?</label>
+                    <input type="text" id="ou-c3-25">
+                </span>
+            </li>
+        </ul>
+    </section>
+
+    <section class="card">
+        <h2>Carte 4 : bingo de l'accessibilité</h2>
+            <div class="rules">
+                <p>
+                    Explore les deux pages du mini-site LumoMobile, l'accueil et le formulaire de
+                    contact. Dès que tu repères un des défauts de ta carte, coche la case et note où tu
+                    l'as trouvé. Une ligne, une colonne ou une diagonale complète, et c'est bingo !
+                
+                    Varie les méthodes : range la souris et navigue au clavier, zoome à 200 %,
+                    désactive les styles, etc.
+                </p>
+            </div>
+        <ul class="grid">
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c4-1">
+                    <label for="c4-1">Des rôles ARIA menu et menuitem posés sur de vrais liens</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c4-1">Où&nbsp;?</label>
+                    <input type="text" id="ou-c4-1">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c4-2">
+                    <label for="c4-2">Un changement de contenu qui n'est jamais annoncé</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c4-2">Où&nbsp;?</label>
+                    <input type="text" id="ou-c4-2">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c4-3">
+                    <label for="c4-3">Un contenu visible mais masqué aux lecteurs d'écran</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c4-3">Où&nbsp;?</label>
+                    <input type="text" id="ou-c4-3">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c4-4">
+                    <label for="c4-4">Un faux lien ou un faux bouton fabriqué avec une div</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c4-4">Où&nbsp;?</label>
+                    <input type="text" id="ou-c4-4">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c4-5">
+                    <label for="c4-5">Une information donnée uniquement par la couleur</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c4-5">Où&nbsp;?</label>
+                    <input type="text" id="ou-c4-5">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c4-6">
+                    <label for="c4-6">Le focus clavier totalement invisible</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c4-6">Où&nbsp;?</label>
+                    <input type="text" id="ou-c4-6">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c4-7">
+                    <label for="c4-7">Aucune zone : ni header, ni nav, ni main, ni footer</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c4-7">Où&nbsp;?</label>
+                    <input type="text" id="ou-c4-7">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c4-8">
+                    <label for="c4-8">Une page sans attribut lang</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c4-8">Où&nbsp;?</label>
+                    <input type="text" id="ou-c4-8">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c4-9">
+                    <label for="c4-9">Un texte gris trop clair pour être lu</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c4-9">Où&nbsp;?</label>
+                    <input type="text" id="ou-c4-9">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c4-10">
+                    <label for="c4-10">Un titre qui n'en est pas un : une div stylée</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c4-10">Où&nbsp;?</label>
+                    <input type="text" id="ou-c4-10">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c4-11">
+                    <label for="c4-11">Une erreur signalée par une bordure rouge et rien d'autre</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c4-11">Où&nbsp;?</label>
+                    <input type="text" id="ou-c4-11">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c4-12">
+                    <label for="c4-12">Des onglets impossibles à utiliser au clavier</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c4-12">Où&nbsp;?</label>
+                    <input type="text" id="ou-c4-12">
+                </span>
+            </li>
+            <li class="joker">
+                <span class="statement">
+                    <input type="checkbox" id="c4-13">
+                    <label for="c4-13">JOKER : un défaut que tu as trouvé et qui n'est pas dans la grille</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c4-13">Où&nbsp;?</label>
+                    <input type="text" id="ou-c4-13">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c4-14">
+                    <label for="c4-14">Une liste fabriquée avec des retours à la ligne</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c4-14">Où&nbsp;?</label>
+                    <input type="text" id="ou-c4-14">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c4-15">
+                    <label for="c4-15">Des champs personnels sans autocomplete</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c4-15">Où&nbsp;?</label>
+                    <input type="text" id="ou-c4-15">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c4-16">
+                    <label for="c4-16">Un texte peu contrasté sur fond sombre</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c4-16">Où&nbsp;?</label>
+                    <input type="text" id="ou-c4-16">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c4-17">
+                    <label for="c4-17">Une animation impossible à arrêter</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c4-17">Où&nbsp;?</label>
+                    <input type="text" id="ou-c4-17">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c4-18">
+                    <label for="c4-18">Un prix ou une remise affiché uniquement dans une image</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c4-18">Où&nbsp;?</label>
+                    <input type="text" id="ou-c4-18">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c4-19">
+                    <label for="c4-19">Du contenu coupé par une hauteur fixe</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c4-19">Où&nbsp;?</label>
+                    <input type="text" id="ou-c4-19">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c4-20">
+                    <label for="c4-20">Une image sans aucun attribut alt</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c4-20">Où&nbsp;?</label>
+                    <input type="text" id="ou-c4-20">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c4-21">
+                    <label for="c4-21">Aucun titre de niveau 1 sur la page</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c4-21">Où&nbsp;?</label>
+                    <input type="text" id="ou-c4-21">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c4-22">
+                    <label for="c4-22">Un champ de formulaire sans étiquette</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c4-22">Où&nbsp;?</label>
+                    <input type="text" id="ou-c4-22">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c4-23">
+                    <label for="c4-23">Le même intitulé de lien répété sur toute la page</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c4-23">Où&nbsp;?</label>
+                    <input type="text" id="ou-c4-23">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c4-24">
+                    <label for="c4-24">Des boutons radio sans regroupement ni légende</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c4-24">Où&nbsp;?</label>
+                    <input type="text" id="ou-c4-24">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c4-25">
+                    <label for="c4-25">Un alt qui dit « icône » ou « image »</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c4-25">Où&nbsp;?</label>
+                    <input type="text" id="ou-c4-25">
+                </span>
+            </li>
+        </ul>
+    </section>
+
+    <section class="card">
+        <h2>Carte 5 : bingo de l'accessibilité</h2>
+            <div class="rules">
+                <p>
+                    Explore les deux pages du mini-site LumoMobile, l'accueil et le formulaire de
+                    contact. Dès que tu repères un des défauts de ta carte, coche la case et note où tu
+                    l'as trouvé. Une ligne, une colonne ou une diagonale complète, et c'est bingo !
+                
+                    Varie les méthodes : range la souris et navigue au clavier, zoome à 200 %,
+                    désactive les styles, etc.
+                </p>
+            </div>
+        <ul class="grid">
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c5-1">
+                    <label for="c5-1">Un faux lien ou un faux bouton fabriqué avec une div</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c5-1">Où&nbsp;?</label>
+                    <input type="text" id="ou-c5-1">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c5-2">
+                    <label for="c5-2">Un prix ou une remise affiché uniquement dans une image</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c5-2">Où&nbsp;?</label>
+                    <input type="text" id="ou-c5-2">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c5-3">
+                    <label for="c5-3">Une page sans attribut lang</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c5-3">Où&nbsp;?</label>
+                    <input type="text" id="ou-c5-3">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c5-4">
+                    <label for="c5-4">Un contenu visible mais masqué aux lecteurs d'écran</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c5-4">Où&nbsp;?</label>
+                    <input type="text" id="ou-c5-4">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c5-5">
+                    <label for="c5-5">Une image sans aucun attribut alt</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c5-5">Où&nbsp;?</label>
+                    <input type="text" id="ou-c5-5">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c5-6">
+                    <label for="c5-6">Aucune zone : ni header, ni nav, ni main, ni footer</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c5-6">Où&nbsp;?</label>
+                    <input type="text" id="ou-c5-6">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c5-7">
+                    <label for="c5-7">Du contenu coupé par une hauteur fixe</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c5-7">Où&nbsp;?</label>
+                    <input type="text" id="ou-c5-7">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c5-8">
+                    <label for="c5-8">Des boutons radio sans regroupement ni légende</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c5-8">Où&nbsp;?</label>
+                    <input type="text" id="ou-c5-8">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c5-9">
+                    <label for="c5-9">Un champ de formulaire sans étiquette</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c5-9">Où&nbsp;?</label>
+                    <input type="text" id="ou-c5-9">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c5-10">
+                    <label for="c5-10">Un texte peu contrasté sur fond sombre</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c5-10">Où&nbsp;?</label>
+                    <input type="text" id="ou-c5-10">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c5-11">
+                    <label for="c5-11">Une erreur signalée par une bordure rouge et rien d'autre</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c5-11">Où&nbsp;?</label>
+                    <input type="text" id="ou-c5-11">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c5-12">
+                    <label for="c5-12">Une information donnée uniquement par la couleur</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c5-12">Où&nbsp;?</label>
+                    <input type="text" id="ou-c5-12">
+                </span>
+            </li>
+            <li class="joker">
+                <span class="statement">
+                    <input type="checkbox" id="c5-13">
+                    <label for="c5-13">JOKER : un défaut que tu as trouvé et qui n'est pas dans la grille</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c5-13">Où&nbsp;?</label>
+                    <input type="text" id="ou-c5-13">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c5-14">
+                    <label for="c5-14">Un changement de contenu qui n'est jamais annoncé</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c5-14">Où&nbsp;?</label>
+                    <input type="text" id="ou-c5-14">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c5-15">
+                    <label for="c5-15">Un titre qui n'en est pas un : une div stylée</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c5-15">Où&nbsp;?</label>
+                    <input type="text" id="ou-c5-15">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c5-16">
+                    <label for="c5-16">Aucun titre de niveau 1 sur la page</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c5-16">Où&nbsp;?</label>
+                    <input type="text" id="ou-c5-16">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c5-17">
+                    <label for="c5-17">Le même intitulé de lien répété sur toute la page</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c5-17">Où&nbsp;?</label>
+                    <input type="text" id="ou-c5-17">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c5-18">
+                    <label for="c5-18">Une liste fabriquée avec des retours à la ligne</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c5-18">Où&nbsp;?</label>
+                    <input type="text" id="ou-c5-18">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c5-19">
+                    <label for="c5-19">Le focus clavier totalement invisible</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c5-19">Où&nbsp;?</label>
+                    <input type="text" id="ou-c5-19">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c5-20">
+                    <label for="c5-20">Des rôles ARIA menu et menuitem posés sur de vrais liens</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c5-20">Où&nbsp;?</label>
+                    <input type="text" id="ou-c5-20">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c5-21">
+                    <label for="c5-21">Un texte gris trop clair pour être lu</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c5-21">Où&nbsp;?</label>
+                    <input type="text" id="ou-c5-21">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c5-22">
+                    <label for="c5-22">Des champs personnels sans autocomplete</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c5-22">Où&nbsp;?</label>
+                    <input type="text" id="ou-c5-22">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c5-23">
+                    <label for="c5-23">Des onglets impossibles à utiliser au clavier</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c5-23">Où&nbsp;?</label>
+                    <input type="text" id="ou-c5-23">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c5-24">
+                    <label for="c5-24">Une animation impossible à arrêter</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c5-24">Où&nbsp;?</label>
+                    <input type="text" id="ou-c5-24">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c5-25">
+                    <label for="c5-25">Un alt qui dit « icône » ou « image »</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c5-25">Où&nbsp;?</label>
+                    <input type="text" id="ou-c5-25">
+                </span>
+            </li>
+        </ul>
+    </section>
+
+    <section class="card">
+        <h2>Carte 6 : bingo de l'accessibilité</h2>
+            <div class="rules">
+                <p>
+                    Explore les deux pages du mini-site LumoMobile, l'accueil et le formulaire de
+                    contact. Dès que tu repères un des défauts de ta carte, coche la case et note où tu
+                    l'as trouvé. Une ligne, une colonne ou une diagonale complète, et c'est bingo !
+                
+                    Varie les méthodes : range la souris et navigue au clavier, zoome à 200 %,
+                    désactive les styles, etc.
+                </p>
+            </div>
+        <ul class="grid">
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c6-1">
+                    <label for="c6-1">Des champs personnels sans autocomplete</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c6-1">Où&nbsp;?</label>
+                    <input type="text" id="ou-c6-1">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c6-2">
+                    <label for="c6-2">Un prix ou une remise affiché uniquement dans une image</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c6-2">Où&nbsp;?</label>
+                    <input type="text" id="ou-c6-2">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c6-3">
+                    <label for="c6-3">Un faux lien ou un faux bouton fabriqué avec une div</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c6-3">Où&nbsp;?</label>
+                    <input type="text" id="ou-c6-3">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c6-4">
+                    <label for="c6-4">Un changement de contenu qui n'est jamais annoncé</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c6-4">Où&nbsp;?</label>
+                    <input type="text" id="ou-c6-4">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c6-5">
+                    <label for="c6-5">Une animation impossible à arrêter</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c6-5">Où&nbsp;?</label>
+                    <input type="text" id="ou-c6-5">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c6-6">
+                    <label for="c6-6">Des boutons radio sans regroupement ni légende</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c6-6">Où&nbsp;?</label>
+                    <input type="text" id="ou-c6-6">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c6-7">
+                    <label for="c6-7">Un alt qui dit « icône » ou « image »</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c6-7">Où&nbsp;?</label>
+                    <input type="text" id="ou-c6-7">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c6-8">
+                    <label for="c6-8">Une information donnée uniquement par la couleur</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c6-8">Où&nbsp;?</label>
+                    <input type="text" id="ou-c6-8">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c6-9">
+                    <label for="c6-9">Un texte peu contrasté sur fond sombre</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c6-9">Où&nbsp;?</label>
+                    <input type="text" id="ou-c6-9">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c6-10">
+                    <label for="c6-10">Aucune zone : ni header, ni nav, ni main, ni footer</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c6-10">Où&nbsp;?</label>
+                    <input type="text" id="ou-c6-10">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c6-11">
+                    <label for="c6-11">Des onglets impossibles à utiliser au clavier</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c6-11">Où&nbsp;?</label>
+                    <input type="text" id="ou-c6-11">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c6-12">
+                    <label for="c6-12">Une page sans attribut lang</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c6-12">Où&nbsp;?</label>
+                    <input type="text" id="ou-c6-12">
+                </span>
+            </li>
+            <li class="joker">
+                <span class="statement">
+                    <input type="checkbox" id="c6-13">
+                    <label for="c6-13">JOKER : un défaut que tu as trouvé et qui n'est pas dans la grille</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c6-13">Où&nbsp;?</label>
+                    <input type="text" id="ou-c6-13">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c6-14">
+                    <label for="c6-14">Un texte gris trop clair pour être lu</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c6-14">Où&nbsp;?</label>
+                    <input type="text" id="ou-c6-14">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c6-15">
+                    <label for="c6-15">Une erreur signalée par une bordure rouge et rien d'autre</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c6-15">Où&nbsp;?</label>
+                    <input type="text" id="ou-c6-15">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c6-16">
+                    <label for="c6-16">Le même intitulé de lien répété sur toute la page</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c6-16">Où&nbsp;?</label>
+                    <input type="text" id="ou-c6-16">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c6-17">
+                    <label for="c6-17">Le focus clavier totalement invisible</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c6-17">Où&nbsp;?</label>
+                    <input type="text" id="ou-c6-17">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c6-18">
+                    <label for="c6-18">Du contenu coupé par une hauteur fixe</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c6-18">Où&nbsp;?</label>
+                    <input type="text" id="ou-c6-18">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c6-19">
+                    <label for="c6-19">Des rôles ARIA menu et menuitem posés sur de vrais liens</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c6-19">Où&nbsp;?</label>
+                    <input type="text" id="ou-c6-19">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c6-20">
+                    <label for="c6-20">Aucun titre de niveau 1 sur la page</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c6-20">Où&nbsp;?</label>
+                    <input type="text" id="ou-c6-20">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c6-21">
+                    <label for="c6-21">Un contenu visible mais masqué aux lecteurs d'écran</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c6-21">Où&nbsp;?</label>
+                    <input type="text" id="ou-c6-21">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c6-22">
+                    <label for="c6-22">Une image sans aucun attribut alt</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c6-22">Où&nbsp;?</label>
+                    <input type="text" id="ou-c6-22">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c6-23">
+                    <label for="c6-23">Un champ de formulaire sans étiquette</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c6-23">Où&nbsp;?</label>
+                    <input type="text" id="ou-c6-23">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c6-24">
+                    <label for="c6-24">Une liste fabriquée avec des retours à la ligne</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c6-24">Où&nbsp;?</label>
+                    <input type="text" id="ou-c6-24">
+                </span>
+            </li>
+            <li>
+                <span class="statement">
+                    <input type="checkbox" id="c6-25">
+                    <label for="c6-25">Un titre qui n'en est pas un : une div stylée</label>
+                </span>
+                <span class="location">
+                    <label for="ou-c6-25">Où&nbsp;?</label>
+                    <input type="text" id="ou-c6-25">
+                </span>
+            </li>
+        </ul>
+    </section>
+
+</body>
+
+</html>

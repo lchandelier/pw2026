@@ -1,0 +1,104 @@
+.contact-section {
+    background: rgb(245, 245, 245);
+    padding: 6rem 0;
+}
+
+.form-wrap {
+    max-width: 60rem;
+    margin: 0 auto;
+    background: rgb(255, 255, 255);
+    border-radius: 0.8rem;
+    padding: 4rem;
+}
+
+.form-wrap h4 {
+    font-size: 3rem;
+    color: rgb(13, 27, 42);
+    margin: 0 0 1rem;
+}
+
+.form-wrap p.intro {
+    color: rgb(102, 102, 102);
+    font-size: 1.5rem;
+    max-width: 70rem;
+    margin: 0 0 2.4rem;
+}
+
+.form-wrap p.error-msg {
+    display: none;
+    color: rgb(198, 40, 40);
+    background: rgb(255, 235, 238);
+    border: 0.1rem solid rgb(255, 205, 210);
+    border-radius: 0.4rem;
+    font-size: 1.4rem;
+    padding: 1rem 1.4rem;
+    margin: 0 0 2rem;
+}
+
+.form-wrap .field {
+    margin-bottom: 2rem;
+}
+
+.form-wrap .field-label {
+    display: block;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: rgb(13, 27, 42);
+    margin-bottom: 0.6rem;
+}
+
+.form-wrap input[type="text"],
+.form-wrap select,
+.form-wrap textarea {
+    width: 100%;
+    font-family: Arial, sans-serif;
+    font-size: 1.4rem;
+    color: rgb(42, 42, 42);
+    border: 0.1rem solid rgb(224, 224, 224);
+    border-radius: 0.4rem;
+    padding: 1rem 1.2rem;
+    background: rgb(255, 255, 255);
+}
+
+.form-wrap input[type="text"]:focus,
+.form-wrap select:focus,
+.form-wrap textarea:focus {
+    border-color: rgb(21, 101, 192);
+}
+
+.form-wrap textarea {
+    min-height: 10rem;
+    resize: vertical;
+}
+
+.form-wrap .group-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: rgb(13, 27, 42);
+    margin-bottom: 0.8rem;
+}
+
+.form-wrap .radio-row,
+.form-wrap .checkbox-row {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 1.4rem;
+    color: rgb(85, 85, 85);
+    margin-bottom: 0.8rem;
+}
+
+.form-wrap .submit-btn {
+    background: rgb(21, 101, 192);
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 0.6rem;
+    font-size: 1.5rem;
+    padding: 1.2rem 2.8rem;
+    margin-top: 1rem;
+    cursor: pointer;
+}
+
+.form-wrap .submit-btn:hover {
+    background: rgb(13, 71, 161);
+}

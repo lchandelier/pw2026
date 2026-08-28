@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="site.webmanifest">
+    <title>Arbre de décision pour les alternatives textuelles</title>
+    <style>
+        @font-face {
+            font-family: 'atk_reg';
+            src: url('css/fonts/atkinson-regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'atk_bold';
+            src: url('css/fonts/atkinson-bold.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        :root {
+            --primary-color: rgb(23, 61, 81);
+            --lightest-color: rgb(250, 250, 250);
+            --secondary-color: rgb(75, 196, 177);
+            --font-bold: atk_bold, arial, sans-serif;
+            --font-reg: atk_reg, arial, sans-serif;
+        }
+
+        html {
+            font-size: 62.5%;
+        }
+
+        body {
+            max-width: 76.8rem;
+            margin: 0 auto;
+            padding: 2rem;
+            color: var(--primary-color);
+            background-color: var(--lightest-color);
+            font-family: var(--font-reg);
+            font-size: 1.6rem;
+            line-height: 1.5;
+        }
+
+        h1 {
+            font-family: var(--font-bold);
+            font-size: 2.5rem;
+            line-height: 1.3;
+        }
+
+        .tree {
+            padding-left: 0;
+        }
+        
+        .tree li {
+            padding: 1.5rem 2rem;
+            border-radius: 0.5rem;
+            background: var(--primary-color);
+            color: var(--lightest-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .tree li::marker {
+            color: var(--primary-color);
+        }
+
+        .tree h2 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        .tree p {
+            margin: 0.25rem 0 0;
+        }
+
+        .answer {
+            margin-top: 0.75rem;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            background: var(--secondary-color);
+            color: var(--primary-color);
+        }
+
+        code {
+            font-size: 1.4rem;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Arbre de décision pour le texte alternatif des images</h1>
+
+    <p>
+        Parcourez les questions dans l’ordre. À la première réponse « oui »,
+        appliquez l’alternative indiquée. Si la réponse est « non », passez à la
+        question suivante.
+    </p>
+
+    <ol class="tree">
+        <li>
+            <h2>L’image est-elle décorative ?</h2>
+            <p>Elle n’apporte aucune information utile à la compréhension.</p>
+            <p class="answer">Oui : <code>alt=""</code>, un attribut alt vide.</p>
+        </li>
+
+        <li>
+            <h2>L’image représente-t-elle une action ?</h2>
+            <p>Elle est cliquable, placée dans un lien ou un bouton.</p>
+            <p class="answer">Oui : décrivez l’action, par exemple « Ajouter au panier ».</p>
+        </li>
+
+        <li>
+            <h2>L’image contient-elle du texte ?</h2>
+            <p>Logo, capture d’écran, bouton en image.</p>
+            <p class="answer">Oui : reprenez le texte affiché dans l’image.</p>
+        </li>
+
+        <li>
+            <h2>L’image est-elle complexe ?</h2>
+            <p>Graphique, carte, schéma, infographie.</p>
+            <p class="answer">
+                Oui : donnez une description détaillée à proximité de l’image
+                (tableau de données, texte replié dans un accordéon).
+            </p>
+        </li>
+
+        <li>
+            <h2>L’image est-elle informative ?</h2>
+            <p>Icône de téléphone, de localisation, photo porteuse de sens.</p>
+            <p class="answer">
+                Oui : décrivez brièvement son contenu, par exemple « téléphone »
+                ou « localisation ».
+            </p>
+        </li>
+    </ol>
+</body>
+
+</html>

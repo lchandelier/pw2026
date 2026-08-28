@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 72" width="300" height="72" role="img" aria-label="Nordis Telecom">
+  <title>Nordis Telecom</title>
+
+  <!-- Marque : aiguille de boussole pointant le nord -->
+  <g transform="translate(4 4)">
+  <rect width="64" height="64" rx="14" fill="#0d1b2a"/>
+  <path d="M32 9 L39.5 32 L32 32 Z" fill="#ffffff"/>
+  <path d="M32 9 L24.5 32 L32 32 Z" fill="#4f9bf5"/>
+  <path d="M32 55 L39.5 32 L32 32 Z" fill="#4f9bf5" opacity="0.5"/>
+  <path d="M32 55 L24.5 32 L32 32 Z" fill="#ffffff" opacity="0.45"/>
+  </g>
+
+  <!-- Signature -->
+  <text x="84" y="36" font-family="Arial, Helvetica, sans-serif" font-size="27"
+        font-weight="bold" letter-spacing="0.5" fill="#0d1b2a">NORDIS</text>
+  <text x="86" y="56" font-family="Arial, Helvetica, sans-serif" font-size="12.5"
+        letter-spacing="6.2" fill="#1565c0">TELECOM</text>
+</svg>

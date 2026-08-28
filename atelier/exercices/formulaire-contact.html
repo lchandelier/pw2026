@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Nous contacter | LumoMobile</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/form.css">
+</head>
+
+<body>
+
+    <div class="topbar">
+        <div class="wrap">
+            <div class="brand"><img src="img/logo-lumomobile.svg" alt="Image du logo LumoMobile"></div>
+            <ul class="navlinks" role="menu">
+                <li role="menuitem"><a href="./mini-site.html">Accueil</a></li>
+                <li role="menuitem"><a href="./formulaire-contact.html">Contact</a></li>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-wrap">
+        <h4>Contacte notre service clientèle</h4>
+        <p class="intro">Remplis ce formulaire et nous te répondrons sous 48 heures.</p>
+
+        <p class="error-msg" id="errorMsg">Merci de corriger les champs en erreur avant d'envoyer le formulaire.</p>
+
+        <div class="field">
+            <span class="field-label">Nom *</span>
+            <input type="text" id="nom" name="nom" required>
+        </div>
+
+        <div class="field">
+            <span class="field-label">E-mail (nom@domaine.com) *</span>
+            <input type="text" id="email" name="email" required>
+        </div>
+
+        <div class="field">
+            <span class="field-label">Téléphone mobile *</span>
+            <input type="text" id="telMobile" name="telMobile" required>
+        </div>
+
+        <div class="field">
+            <span class="field-label">Pays *</span>
+            <select id="pays" name="pays" required>
+                <option>Suisse</option>
+                <option>France</option>
+                <option>Belgique</option>
+                <option>Canada</option>
+            </select>
+        </div>
+
+        <div class="field">
+            <div class="group-title">Tranche d'âge</div>
+            <div class="radio-row">
+                <input type="radio" name="age" value="18-30" id="age1">
+                <span>18 à 30 ans</span>
+            </div>
+            <div class="radio-row">
+                <input type="radio" name="age" value="31-50" id="age2">
+                <span>31 à 50 ans</span>
+            </div>
+            <div class="radio-row">
+                <input type="radio" name="age" value="51-70" id="age3">
+                <span>51 à 70 ans</span>
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="group-title">Tu souhaites être recontacté par</div>
+            <div class="checkbox-row">
+                <input type="checkbox" name="canal" value="email" id="canalEmail">
+                <span>E-mail</span>
+            </div>
+            <div class="checkbox-row">
+                <input type="checkbox" name="canal" value="tel" id="canalTel">
+                <span>Téléphone</span>
+            </div>
+            <div class="checkbox-row">
+                <input type="checkbox" name="canal" value="sms" id="canalSms">
+                <span>SMS</span>
+            </div>
+        </div>
+
+        <div class="field">
+            <span class="field-label">Ton message</span>
+            <textarea id="message" name="message"></textarea>
+        </div>
+
+        <button class="submit-btn" type="submit">Envoyer</button>
+    </div>
+
+    <div class="company">
+        <div class="wrap">
+            <img class="logo" src="img/logo-nordis-telecom.svg" alt="">            
+            <div>
+                <p>
+                    LumoMobile est une marque de <strong>Nordis Telecom SA</strong>.<br>
+                    Adresse : Rue des Alpes 14, CH-1000 Lausanne
+                </p>
+                <p>Si tu as des questions, <a href="./formulaire-contact.html" class="link">contacte notre service clientèle</a>.</p>
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="wrap">
+            <div class="col">
+                <ul>
+                    <li><a href="./mini-site.html">Accueil</a></li>
+                    <li><a href="./formulaire-contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('.submit-btn').addEventListener('click', function (e) {
+            e.preventDefault();
+
+            var fields = [
+                { el: document.getElementById('nom') },
+                { el: document.getElementById('email'), pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ },
+                { el: document.getElementById('telMobile') },
+                { el: document.getElementById('pays') }
+            ];
+
+            fields.forEach(function (field) {
+                var fieldValue = field.el.value.trim();
+                var inError = fieldValue === '' || (field.pattern && !field.pattern.test(fieldValue));
+
+                field.el.style.border = inError ? ' 1px solid red' : '';
+                document.getElementById('errorMsg').style.display = 'block';
+            });
+        });
+    </script>
+
+</body>
+
+</html>

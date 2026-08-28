@@ -1,0 +1,288 @@
+html {
+    font-size: 62.5%;
+}
+
+* {
+    box-sizing: border-box;
+    outline: none;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: rgb(42, 42, 42);
+    background: rgb(255, 255, 255);
+}
+
+.wrap {
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.topbar {
+    background: rgb(13, 27, 42);
+    color: rgb(255, 255, 255);
+    padding: 0 1.5rem;
+}
+
+.topbar .wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+}
+
+.brand img {
+    display: block;
+    max-height: 5rem;
+}
+
+.navlinks {
+    display: flex;
+    gap: 2.4rem;
+}
+
+ul {
+    list-style: none;
+}
+
+.navlinks a {
+    text-decoration: none;
+    color: rgb(207, 216, 220);
+    font-size: 1.4rem;
+}
+
+h6 {
+    margin-block: 1rem;
+    font-size: 2rem;
+}
+
+.intro h4 {
+    font-size: 3rem;
+    color: rgb(13, 27, 42);
+    margin-bottom: 1rem;
+}
+
+.intro p {
+    color: rgb(102, 102, 102);
+    font-size: 1.5rem;
+    max-width: 70rem;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.4rem;
+    padding: 3rem 0 6rem;
+}
+
+.card {
+    border: 0.1rem solid rgb(224, 224, 224);
+    border-radius: 0.8rem;
+    padding: 2.4rem;
+}
+
+.card img {
+    width: 2.8rem;
+    height: 2.8rem;
+    margin-bottom: 1.4rem;
+}
+
+.card h6,
+.card h2 {
+    font-size: 1.7rem;
+    margin: 0 0 1rem;
+    color: rgb(21, 101, 192)
+}
+
+.card p {
+    font-size: 1.4rem;
+    color: rgb(255, 255, 255);
+    line-height: 1.5;
+    margin-bottom: 1.6rem;
+}
+
+.card div.link {
+    color: rgb(21, 101, 192);
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+.company {
+    background: rgb(245, 245, 245);
+    padding: 4rem 0;
+}
+
+.company .wrap {
+    display: flex;
+    align-items: center;
+    gap: 2.4rem;
+}
+
+.company img.logo {
+    flex-shrink: 0;
+}
+
+.company p {
+    font-size: 1.4rem;
+    color: rgb(85, 85, 85);
+    line-height: 1.6;
+}
+
+.footer {
+    background: rgb(13, 27, 42);
+    color: rgb(176, 190, 197);
+    padding: 4rem 0;
+    font-size: 1.3rem;
+}
+
+.footer .wrap {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer .col ul {
+    margin-bottom: 0.8rem;
+    list-style: none;
+}
+
+.footer .col li {
+    margin-bottom: 0.8rem;
+}
+
+.footer .col a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Promotions du moment */
+
+.promos {
+    background: rgb(13, 27, 42);
+    padding: 2rem;
+    margin: 3rem 0;
+}
+
+.section-title, .section-title-light {
+    font-size: 2.4rem;
+    font-weight: bold;
+    margin: 1.8rem 0 0.6rem;
+}
+
+.section-title-light {
+    color: #fff;
+}
+
+.promo-flash {
+    color: rgb(220, 20, 60);
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0.6rem 0;
+}
+
+.promo-flash div {
+    display: inline-block;
+    padding-left: 100%;
+    font-size: 1.5rem;
+    font-weight: bold;
+    animation: defile 12s linear infinite;
+}
+
+@keyframes defile {
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+.note,
+.card p.note {
+    color: rgb(189, 189, 189);
+    font-size: 1.1rem;
+}
+
+.centered {
+    text-align: center;
+}
+
+.warning {
+    color: rgb(229, 57, 53);
+}
+
+.highlight {
+    border: 0.2rem solid rgb(229, 57, 53);
+}
+
+.promos .card,
+.plans .card {
+    height: 23rem;
+    overflow: hidden;
+}
+
+.card img.price {
+    width: 14rem;
+    height: auto;
+    margin-bottom: 1.4rem;
+}
+
+.card div.arrow {
+    font-size: 2.2rem;
+}
+
+/* Nos forfaits */
+
+.tabs {
+    text-align: center;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+}
+
+.tabs div {
+    display: inline-block;
+    padding: 0.6rem 1.4rem;
+    cursor: pointer;
+    border-bottom: 0.3rem solid #000;
+}
+
+.tabs .on {
+    border-bottom: 0.3rem solid rgb(229, 57, 53);
+}
+
+.hidden {
+    display: none;
+}
+
+.specs {
+    color: rgb(102, 102, 102);
+    font-size: 1.4rem;
+    line-height: 1.6;
+    margin-bottom: 1.6rem;
+    max-height: 7rem;
+    overflow: hidden;
+}
+
+/* Pourquoi nous choisir */
+
+.feature {
+    color: rgb(13, 27, 42);
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-bottom: 0.8rem;
+}
+
+.claim {
+    text-align: center;
+    font-size: 1.8rem;
+    margin: 2rem 0;
+}
+
+/* Service clientèle */
+
+.company .link {
+    color: rgb(21, 101, 192);
+    cursor: pointer;
+}
