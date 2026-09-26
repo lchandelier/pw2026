@@ -116,28 +116,7 @@
             </div>
         </div>
     </div>
-
-    <script>
-        document.querySelector('.submit-btn').addEventListener('click', function (e) {
-            e.preventDefault();
-
-            var fields = [
-                { el: document.getElementById('nom') },
-                { el: document.getElementById('email'), pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ },
-                { el: document.getElementById('telMobile') },
-                { el: document.getElementById('pays') }
-            ];
-
-            fields.forEach(function (field) {
-                var fieldValue = field.el.value.trim();
-                var inError = fieldValue === '' || (field.pattern && !field.pattern.test(fieldValue));
-
-                field.el.style.border = inError ? ' 1px solid red' : '';
-                document.getElementById('errorMsg').style.display = 'block';
-            });
-        });
-    </script>
-
+     <script src="js/scripts.js"></script>
 </body>
 
 </html>

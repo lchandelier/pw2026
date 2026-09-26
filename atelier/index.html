@@ -27,7 +27,7 @@
 
 			<div id="volet"></div>
 			
-			<header id="banner" role="banner" class="main-header">
+			<header id="banner" class="main-header">
 				<a href="https://lena-chandelier.me">
 					<img id="logo" class="main-logo" src="img_slide/l.svg" width="44"
 						alt="L, Portfolio de Lena Chandelier" role="img"/>
@@ -74,7 +74,7 @@
 
 			<div id="wrapper">
 			
-				<main role="main" id="main">
+				<main id="main">
 					<section class="slide cover">
 						<h2 class="is-hidden">Le front-end pour les RAN</h2>
 						<picture>
@@ -85,6 +85,19 @@
 						</picture>
 					</section>
 					<section class="slide">
+						<div class="grid grid--third-reverse">
+							<div>
+								<h2>Qui suis-je ?</h2>
+								<ul>
+									<li>Lena Chandelier</li>
+									<li>Lead développeuse Front-end et Référente Accessibilité Numérique</li>
+									<li>Salt Mobile SA, Suisse</li>
+								</ul>
+							</div>
+							<img src="img_slide/portrait.webp" alt=""/>
+						</div>
+				</section>
+					<section class="slide">
 						<h2>Au programme</h2>
 						<ul>
 							<li>Du code ? Mais je ne suis pas technique moi !</li>
@@ -94,18 +107,19 @@
 							<li>La pertinence des intitulés</li>
 							<li>Les formulaires</li>
 							<li>Autres vérifications simples</li>
-							<li>Quand même un peu de CSS</li>
-							<li>Et ARIA dans tout ça?</li>
-							<li>Outils</li>
+							<li>Que peut-on vérifier au niveau du CSS ?</li>
+							<li>Et ARIA dans tout ça ?</li>
+							<li>Des outils pour vous aider</li>
 							<li>À vous de jouer !</li>
-							<li>Ressources et accompagnement</li>
+							<li>Des liens pour vous aider</li>
+							<li>Des spécialistes pour vous aider</li>
 						</ul>
 					</section>
 					<section class="slide">
 						<h2>Du code… Mais je ne suis pas technique moi !</h2>
 						<ul>
 							<li class="Cmasque">Prenez une grande respiration, tout va bien se passer.</li>
-							<li class="Cmasque">Il n’y a pas besoin d’être expert·e technique pour être un·e bon RAN.</li>
+							<li class="Cmasque">Il n’y a pas besoin d’être expert·e technique pour être un·e bon·ne RAN.</li>
 							<li class="Cmasque">L’objectif est de vous donner les bases nécessaires pour y arriver même sans être technique.</li>
 						</ul>
 						<p class="Cmasque"><strong lang="en">Disclaimer : </strong>Je pars du principe que vous êtes des grand·es débutant·es en la matière.</p>
@@ -116,15 +130,15 @@
 							<li>Avoir quelques bases de HTML, de CSS et d’ARIA</li>
 							<li>Savoir se servir de la console du navigateur</li>
 						</ol>
-						<p class="Cmasque">L’objectif est de savoir rapidement si un site est accessible ou non et, avec des connaissances de base, cela se voit très vite !</p>
+						<p class="Cmasque">L'objectif est de savoir rapidement repérer les problèmes d'accessibilité les plus fréquents et d'identifier les situations qui nécessitent un audit plus approfondi. Avec des connaissances de base, cela se voit très vite !</p>
 						<p class="Cmasque"><strong>Personne ne peut vous demander d’être expert·e sur ce sujet.</strong> C’est technique et c’est complexe.<br/>
-						Des expert·es sont là pour vous aider.</p>			
+						Des spécialistes sont là pour vous aider.</p>			
 					</section>
 					<section class="slide">
 						<h2>La sémantique</h2>
-						<p>Respect des critères RGAA 8.9, 9.1, 9.2, 9.3, 12.6.</p>
-						<p class="Cmasque">La sémantique est la <strong>clé d’un site accessible</strong>. Grâce à elle, un lecteur d’écran saura restituer correctement ce qui s’affiche, un logiciel de reconnaissance vocale pourra aisément faire les actions demandées par son utilisateur...</p>
-						<p class="Cmasque">La majorité des balises veulent dire quelque chose. Quelques exceptions: &lt;div&gt;, &lt;span&gt;, ...</p>
+						<p>Quelques critères RGAA concernés : 8.9, 9.1, 9.2, 9.3, 12.6.</p>
+						<p class="Cmasque">La sémantique est <strong>une des bases fondamentales d’un site accessible</strong>. Grâce à elle, un lecteur d’écran saura restituer correctement ce qui s’affiche, un logiciel de reconnaissance vocale pourra aisément faire les actions demandées par son utilisateur...</p>
+						<p class="Cmasque">Privilégiez les éléments HTML qui expriment nativement la fonction ou la structure du contenu :</p>
 						<ul class="Cmasque">
 							<li>Balises de base : &lt;html&gt;&lt;head&gt;&lt;body&gt;</li>
 							<li>Balises de titres : &lt;h1&gt; à &lt;h6&gt;</li>
@@ -137,7 +151,7 @@
 					</section>
 					<section class="slide">
 						<h2>Les images</h2>
-						<p>Respect des critères RGAA 1.1, 1.2, 1.3 (+ 1.6 et 1.7 si l’image nécessite une description détaillée, 1.8 s’il s’agit d’une image texte).</p>
+						<p>Quelques critères RGAA concernés : 1.1, 1.2, 1.3 (+ 1.6 et 1.7 si l’image nécessite une description détaillée, 1.8 s’il s’agit d’une image texte).</p>
 						<p class="Cmasque">Il faut d’abord savoir détecter si l’image est décorative ou non.</p>
 						<ul class="Cmasque">
 							<li>Oui : alt=""</li>
@@ -162,20 +176,20 @@
 					</section>
 					<section class="slide">
 						<h2>La pertinence des intitulés</h2>
-						<p>Respect des critères RGAA 6.1, 6.2, 8.6, 9.1, 11.2, 11.9.</p>
+						<p>Quelques critères RGAA concernés : 6.1, 6.2, 8.6, 9.1, 11.2, 11.9.</p>
 						<p class="Cmasque">Les intitulés rassemblent tout ce qui est titre de page, titres dans la page, texte dans un bouton ou lien, étiquette de champ de formulaire (label)</p>
 						<p class="Cmasque">Ils doivent clairement indiquer ce qu’ils sont ou ce qu’ils font.</p>
 						<p class="Cmasque">On rencontre souvent des intitulés du type «cliquez ici», «lire la suite», «en savoir plus». Cela ne dit absolument pas où l’on va atterrir, ce qu’on va lire ou savoir de plus si nous n’avons pas le contexte visuel autour.</p>
 					</section>
 					<section class="slide">
-						<h2>Démo: Incidence sur les lecteurs d’écrans</h2>
+						<h2>Démo : Incidence sur les lecteurs d’écrans</h2>
 						<a href="https://youtu.be/xysBPL6stvY" target="_blank" aria-label="Vidéo présentant la restitution d’intitulé par un lecteur d’écran (nouvelle fenêtre)">Vidéo présentant la restitution d’intitulé par un lecteur d’écran</a>
 					</section>
 					<section class="slide">
 						<h2>Solutions</h2>
 						<ol class="Cmasque">
-							<li>Éviter les «cliquez-ici», «en savoir plus», «Lire la suite» «Envoyer» «Continuer» «Ok»</li>
-							<li>Sinon, s’assurer de la présence d’un texte de remplacement via l’attribut aria-label ou un <a href="https://www.ffoodd.fr/masquage-accessible-de-pointe/" target="_blank" aria-label="texte caché de manière accessible (nouvelle fenêtre)">texte caché de manière accessible</a></li>
+							<li>Éviter les «cliquez-ici», «en savoir plus», «lire la suite» «ok» et rendre l'intitulé visible suffisamment explicite</li>
+							<li>Sinon (impact design par exemple), s’assurer de la présence d’un texte de remplacement via l’attribut aria-label ou un <a href="https://www.ffoodd.fr/masquage-accessible-de-pointe/" target="_blank" aria-label="texte caché de manière accessible (nouvelle fenêtre)">texte caché de manière accessible</a></li>
 						</ol>
 						<div class="grid grid--third Cmasque">
 						<img src="img_slide/savoir-plus.webp" alt="" width="400"/>
@@ -201,7 +215,7 @@
 						<h2>Les formulaires</h2>
 						<p>Sont à vérifier :</p>
 						<ul class="Cmasque">
-							<li>Chaque champ à un intitulé (pertinent, bien sûr)</li>
+							<li>Chaque champ a un intitulé (pertinent, bien sûr)</li>
 							<li>Les champs de même nature sont regroupés</li>
 							<li>Les messages d’erreurs sont explicites</li>
 							<li>Des aides à la saisie sont présentes</li>
@@ -209,13 +223,15 @@
 					</section>
 					<section class="slide">
 						<h2>Chaque champ a un intitulé</h2>
-						<p>Respect des critères RGAA 11.1, 11.2, 11.4.</p>
-							<pre><code class="html">&lt;label for="nom"&gt;Nom *&lt;/label&gt;
+						<p>Quelques critères RGAA concernés : 11.1, 11.2, 11.4.</p>
+							<pre><code class="html">&lt;p&gt;* Champ obligatoire&lt;/p&gt;
+&lt;label for="nom"&gt;Nom *&lt;/label&gt;
 &lt;input type="text" id="nom" name="nom" required/&gt;
 &lt;label for="email"&gt;E-mail *&lt;/label&gt;
 &lt;input type="email" id="email" name="email" required/&gt;</code></pre>
 						<p>OU :</p>
-							<pre><code class="html">&lt;label&gt;
+							<pre><code class="html">&lt;p&gt;* Champ obligatoire&lt;/p&gt;
+&lt;label&gt;
   Nom *
   &lt;input type="text" id="nom" name="nom" required/&gt;
 &lt;/label&gt;
@@ -230,7 +246,7 @@
 					</section>
 					<section class="slide">
 						<h2>Regroupement de champs de même nature</h2>
-						<p>Respect des critères RGAA 11.5, 11.6, 11.7.</p>
+						<p>Quelques critères RGAA concernés : 11.5, 11.6, 11.7.</p>
 						<div class="half">
 							<div>							
 								<pre><code class="html">&lt;fieldset&gt;
@@ -275,8 +291,9 @@
 					</section>
 					<section class="slide">
 						<h2>Messages d’erreur explicites</h2>
-						<p>Respect des critères RGAA 7.5, 11.10, 11.11.</p>
-<pre><code class="html">&lt;label for="nom"&gt;Nom *&lt;/label&gt;
+						<p>Quelques critères RGAA concernés : 7.5, 11.10, 11.11.</p>
+<pre><code class="html">&lt;p&gt;* Champ obligatoire&lt;/p&gt;
+&lt;label for="nom"&gt;Nom *&lt;/label&gt;
 &lt;input type="text" id="nom" name="nom" required aria-invalid="true" aria-describedby="nom-error"/&gt;
 &lt;p id="nom-error" class="error"&gt;Le champ nom est obligatoire.&lt;/p&gt;
 
@@ -292,6 +309,7 @@
   &lt;/p&gt;
 &lt;/div&gt;
 </code></pre>
+<p>Attention : à n'utiliser que pour une information importante qui doit être annoncée automatiquement !</p>
 
 					</section>
 					<section class="slide">
@@ -299,7 +317,8 @@
 						<p>
 							Attribut <span lang="en">«autocomplete»</span>, respect du critère RGAA 11.13 - <a href="https://www.w3.org/TR/WCAG22/#input-purposes" target="_blank" hreflang="en" aria-label="Liste complète, en anglais (nouvelle fenêtre)">Liste complète, en anglais</a>
 						</p>
-<pre><code class="html">&lt;label for="nom"&gt;Nom *&lt;/label&gt;
+<pre><code class="html">&lt;p&gt;* Champ obligatoire&lt;/p&gt;
+&lt;label for="nom"&gt;Nom *&lt;/label&gt;
 &lt;input type="text" id="nom" name="nom" required autocomplete="family-name"/&gt;
 
 &lt;label for="email"&gt;E-mail *&lt;/label&gt;
@@ -308,7 +327,8 @@
 <p>
 	Indication du format de saisie attendu, respect du critère RGAA 11.10.
 </p>
-<pre><code class="html">&lt;label for="email"&gt;E-mail * (nom@domaine.fr)&lt;/label&gt;
+<pre><code class="html">&lt;p&gt;* Champ obligatoire&lt;/p&gt;
+&lt;label for="email"&gt;E-mail * (nom@domaine.fr)&lt;/label&gt;
 &lt;input type="email" id="email" name="email" required autocomplete="email"/&gt;
 
 &lt;label for="birthdate"&gt;Date de naissance * (jj/mm/aaaa)&lt;/label&gt;
@@ -318,18 +338,19 @@
 					</section>
 					<section class="slide">
 						<h2>Autres vérifications simples</h2>
-						<p>Respect des critères RGAA 3.1, 8.3, 8.4, 9.1, 12.8 (+ 8.7 et 8.8 en cas de changement de langue dans la page).</p>
+						<p>Quelques critères RGAA concernés : 3.1, 7.1, 8.3, 8.4, 9.1, 12.8 (+ 8.7 et 8.8 en cas de changement de langue dans la page).</p>
 						<ul class="Cmasque">
 							<li>Présence de l’attribut lang sur la balise &lt;html&gt; 
 							<pre><code class="html">&lt;html lang="fr"&gt;</code></pre></li>
-							<li>Hiérarchie logique des titres sans sauts (&lt;h1&gt; facultatif)</li>
+							<li>Hiérarchie pertinente des titres</li>
 							<li>L’ordre de navigation est cohérent</li>
-							<li>Que l'information n'est pas donnée uniquement par la couleur</li>
+							<li>L'information n'est pas donnée uniquement par la couleur</li>
+							<li>Les éléments HTML natifs correspondant à la fonction du composant sont utilisés : <code>&lt;button&gt;</code> pour déclencher une action, <code>&lt;a&gt;</code> pour naviguer.</li>
 						</ul>
 					</section>
 					<section class="slide">
 						<h2>Que peut-on vérifier au niveau du CSS ?</h2>
-						<p class="Cmasque">Respect des critères RGAA 3.2, 3.3, 10.2, 10.3, 10.4, 10.7, 10.11, 10.12, 13.8.</p>
+						<p class="Cmasque">Quelques critères RGAA concernés : 3.2, 3.3, 10.2, 10.3, 10.4, 10.7, 10.11, 10.12, 13.8.</p>
 						<ul>
 							<li class="Cmasque">Vérifier la présence du focus et de son contraste</li>
 							<li class="Cmasque">Vérifier le bon contraste des contenus</li>
@@ -343,11 +364,11 @@
 					<section class="slide">
 						<h2>Et ARIA dans tout ça ?</h2>
 						<p class="Cmasque"><strong>Rappeler la <a href="https://www.w3.org/TR/using-aria/#rule1" target="_blank" hreflang="en" aria-label="Première règle d'ARIA (nouvelle fenêtre)">Première règle d'ARIA</a> (en anglais) aux développeurs / développeuses.</strong></p>
-						<p class="Cmasque">Respect des critères RGAA 6.1, 6.2, 7.1, 7.5, 11.1, 11.2 (+ 1.1 et 1.3 quand aria-label ou aria-labelledby porte le nom accessible d’une image ou d’un SVG).</p>
+						<p class="Cmasque">Quelques critères RGAA concernés : 6.1, 6.2, 7.1, 7.5, 11.1, 11.2 (+ 1.1 et 1.3 quand aria-label ou aria-labelledby porte le nom accessible d’une image ou d’un SVG).</p>
 						<ul>
 							<li class="Cmasque">Vérifier si aria-label, aria-labelledby ou aria-describedby sont utilisés pour fournir un <a href="https://www.24joursdeweb.fr/2019/les-noms-accessibles-dans-tous-leurs-etats" target="_blank" aria-label="nom accessible sur 24 jours de web (nouvelle fenêtre)">nom accessible</a></li>
 							<li class="Cmasque">Vérifier l’utilisation des <a href="https://access42.net/live-regions-aria-live-analogues-alert-log-status/" target="_blank" aria-label="rôles alert, status ou log (nouvelle fenêtre)">rôles alert, status ou log</a></li>
-							<li class="Cmasque">Vérifier que les rôles menu et menuitem sont <strong>absents</strong> du code (sauf si vous recodez une application comme Google Sheet).</li>
+							<li class="Cmasque">Vérifier que les rôles menu et menuitem ne sont pas utilisés pour construire les menus de navigation classiques d'un site.</li>
 						</ul>
 					</section>
 					<section class="slide">
@@ -366,8 +387,8 @@
 						<div class="top-cover">
 							<h2 class="center">À vous de jouer !</h2>
 							<ul>
-								<li><a href="https://tinyurl.com/atelierpw" target="_blank" aria-label="https://tinyurl.com/atelierpw (nouvelle fenêtre)">https://tinyurl.com/atelierpw</a></li>
-								<li><a href="https://tinyurl.com/atelierpw-bingo" target="_blank" aria-label="https://tinyurl.com/atelierpw-bingo (nouvelle fenêtre)">https://tinyurl.com/atelierpw-bingo</a></li>
+								<li><a href="https://lena-chandelier.me/s/atelier" target="_blank" aria-label="https://lena-chandelier.me/s/atelier (nouvelle fenêtre)">https://lena-chandelier.me/s/atelier</a></li>
+								<li><a href="https://lena-chandelier.me/s/bingo" target="_blank" aria-label="https://lena-chandelier.me/s/bingo (nouvelle fenêtre)">https://lena-chandelier.me/s/bingo</a></li>
 							</ul>
 						</div>
 						
@@ -380,12 +401,12 @@
 					<section class="slide">
 						<h2>Des liens pour vous aider</h2>
 						<ul class="Cmasque">
-							<li><a href="https://openclassrooms.com/en/courses/1603881-creez-votre-site-web-avec-html5-et-css3" target="_blank" aria-label="Openclassroom, cours le HTML5/CSS (nouvelle fenêtre)">Openclassroom, cours le HTML5/CSS</a></li>
+							<li><a href="https://openclassrooms.com/en/courses/1603881-creez-votre-site-web-avec-html5-et-css3" target="_blank" aria-label="Openclassrooms, cours le HTML5/CSS (nouvelle fenêtre)">Openclassrooms, cours le HTML5/CSS</a></li>
 							<li><a href="https://ideance.net/fr/ressources-accessibilite-numerique/" target="_blank" aria-label="Ressources accessibilité d’Ideance (nouvelle fenêtre)">Ressources accessibilité d’Ideance</a></li>
 						</ul>
 					</section>
 					<section class="slide">
-						<h2>Des experts pour vous aider</h2>
+						<h2>Des spécialistes pour vous aider</h2>
 						<ul class="Cmasque">
 							<li><a href="https://ideance.net/fr/" target="_blank" aria-label="Ideance (nouvelle fenêtre)">Ideance</a></li>
 							<li><a href="https://www.temesis.com/" target="_blank" aria-label="Temesis (nouvelle fenêtre)">Temesis</a></li>
@@ -399,7 +420,7 @@
 						<h2>Conclusion</h2>
 						<div class="grid grid--half">
 							<div>
-								<p class="Cmasque">Sans être expert·es, vous pouvez déjà couvrir jusqu'à 41 critères du RGAA sur 106.</p>
+								<p class="Cmasque">Sans être expert·es, vous pouvez repérer les erreurs les plus fréquentes sur 41 critères du RGAA sur 106.</p>
 								<p class="Cmasque">Pour aller plus loin, demandez une formation à l'audit ou faites-vous accompagner.</p>
 								<p class="Cmasque"><strong>Vous êtes légitimes</strong> en tant que Référent·e Accessibilité Numérique !</p>
 							</div>
